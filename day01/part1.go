@@ -7,38 +7,26 @@ import (
 	"unicode"
 )
 
-
 func main() {
-	file, _ := os.Open("input")
-
+	file, _ := os.Open("input.txt")
 	scanner := bufio.NewScanner(file)
 
 	lines := []string{}
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
 	}
-
-    fmt.Printf("Answer part 1: %d\n", sum(run(lines)))
+	
+    fmt.Printf("Answer part 1: %d\n", part1(lines))
 }
 
-func sum(arr []int) int {
-    sum := 0
-    for _, v := range arr {
-        sum += v
-    }
-    return sum
-}
-
-func run(lines []string) []int {
-	numbers := []int{}
-
+func part1(lines []string) (sum int) {
 	for _, line := range lines {
-		numbers = append(numbers, runOne(line))
+		sum += run(line)
 	}
-	return numbers
+	return
 }
 
-func runOne(line string) int {
+func run(line string) int {
 	firstSet := false
 	first, last := 0, 0
 	for _, c := range line {
